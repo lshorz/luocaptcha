@@ -4,9 +4,11 @@
 
 ![介绍](https://s.luosimao.com/images/website/captcha/screenshot.jpg)
 
-### 安装
+## 安装
 
-> $ composer require "lshorz/luocaptcha":"dev-master"
+```php
+$ composer require "lshorz/luocaptcha":"dev-master"
+```
 
 如果是laravel<5.5 则修改config/app.php
 增加
@@ -18,14 +20,14 @@ Lshorz\Luosimao\LCaptchaServiceProvider::class
 'LCaptcha' => Lshorz\Luosimao\Facades\LCaptcha::class,
 ```
 
-### 配置
+## 配置
 1.执行
 ```php
 $ php artisan vendor:publish --tag=lcaptcha
 ```
 2.去官注册帐号并配置config/lcaptcha.php
 
-### 使用方法
+## 使用方法
 在需要显示该验证组件的插入
 ```php
 /**
@@ -40,15 +42,16 @@ $ php artisan vendor:publish --tag=lcaptcha
 <div class="l-captcha" data-width="200" data-site-key="xxxxxxxxxxxxxx" data-callback="callback"></div>
 
 <script>
-    function getResponse(resp){
-        $.post('/check', {"{{config('lcaptcha.response_field')}}": resp}, function(res){
+    function callback(resp){
+        $.post('/check', {"luotest_response": resp}, function(res){
             console.log(res);
         });
     }
 </script>
 ```
 
-服务端验证
+### 服务端验证
+方法一：
 ```php
 $v = Validator::make($request->only('luotest_response'), ['luotest_response'=>'required|lcaptcha'], 
  [
@@ -62,7 +65,22 @@ if ($v->fails()) {
 }
 ```
 
-## [luosimao官方使用文档](https://luosimao.com/docs/api/56)
+方法二：
+```php
+use Lshorz\Luocaptcha\Facades\LCaptcha;
+
+...
+
+$res = LCaptcha::verify($request->only('luotest_response'));
+if ($res) {
+    echo 'passed';
+} else {
+    echo 'fail';
+}
+```
+
+其他请参考：
+# [luosimao官方使用文档](https://luosimao.com/docs/api/56)
 
 
 
