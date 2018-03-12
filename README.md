@@ -40,7 +40,9 @@ $ php artisan vendor:publish --tag=lcaptcha
 ```html
 <script src="//captcha.luosimao.com/static/js/api.js"></script>
 <div class="l-captcha" data-width="200" data-site-key="xxxxxxxxxxxxxx" data-callback="callback"></div>
-
+```
+另外需要自己补充JS方法，例如将取得的response(默认参数名为：*luotest_response*)参数post到服务器进行远程验证,参考如下：
+```html
 <script>
     function callback(resp){
         $.post('/check', {"luotest_response": resp}, function(res){
