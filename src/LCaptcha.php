@@ -53,8 +53,7 @@ class LCaptcha
      */
     public function render($width = '100%', $callback = 'getResponse')
     {
-        $html = '<script src="//captcha.luosimao.com/static/js/api.js"></script>';
-        $html .= '<div class="l-captcha" data-width="' . $width . '" data-site-key="' . config('lcaptcha.site_key') . '" data-callback="' . $callback . '"></div>';
+        $html = '<div class="l-captcha" data-width="' . $width . '" data-site-key="' . config('lcaptcha.site_key') . '" data-callback="' . $callback . '"></div>';
         return $html;
     }
 

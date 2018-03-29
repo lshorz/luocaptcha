@@ -28,7 +28,12 @@ $ php artisan vendor:publish --tag=lcaptcha
 2.去官注册帐号并配置config/lcaptcha.php
 
 ## 使用方法
-在需要显示该验证组件的插入
+在页面head等合适的地方加入
+```html
+<script src="//captcha.luosimao.com/static/js/api.js"></script>
+```
+
+在需要显示该验证组件的地方插入以下代码
 ```php
 /**
 * @param string $width  组件宽度
@@ -38,7 +43,6 @@ $ php artisan vendor:publish --tag=lcaptcha
 ```
 将会生成类似代html代码
 ```html
-<script src="//captcha.luosimao.com/static/js/api.js"></script>
 <div class="l-captcha" data-width="200" data-site-key="xxxxxxxxxxxxxx" data-callback="callback"></div>
 ```
 另外需要自己补充JS方法，例如将取得的response(默认参数名为：*luotest_response*)参数post到服务器进行远程验证,参考如下：
